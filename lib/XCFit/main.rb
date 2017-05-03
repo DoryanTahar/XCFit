@@ -59,7 +59,26 @@ module XCFit
 				 system("curl -s -O https://raw.githubusercontent.com/Shashikant86/XCFit/master/Cocoapods/Podfile")
 				 puts "Podfile successfully created in the current working directory here at #{Dir.getwd}/Podfile"
 			end
-
+            def get_cucumberish(version="0.0.7")
+   puts "==================XXXXXXXX===========================" 
+   puts 'Downloading Cucumberish in the current working directory'
+   puts 'You Should execute this command from Cucumberish Xcode target directory'
+   puts "==================XXXXXXXX===========================" 
+   system("curl -sL https://github.com/Ahmed-Ali/Cucumberish/archive/v#{version}.tar.gz | tar xz")
+   cucumberish_dir = "Cucumberish-#{version}" + "/Cucumberish/"
+   system("mv #{cucumberish_dir}  .")
+   system("rm -rf Cucumberish-#{version}")
+   puts "==================XXXXXXXX===========================" 
+   puts "=======Now creating Feature Directory with Demo Feature ===="
+   puts "==================XXXXXXXX===========================" 
+   system("mkdir -p Features")
+   demo_feature_file = $source_cucumberish_template_dir + "/demo.feature"
+   system("cp #{demo_feature_file} Features/")
+   puts $source_cucumberish_template_dir
+   puts "==================XXXXXXXX===========================" 
+   puts "=======Created Feature Directory with Demo Feature ===="
+   puts "==================XXXXXXXX===========================" 
+end
 			desc 'setup_xcfit_fastfile', 'Setup Fastlane Template'
 			def setup_xcfit_fastfile
          puts '=======Creating Template Podfile for the XCFit project'
